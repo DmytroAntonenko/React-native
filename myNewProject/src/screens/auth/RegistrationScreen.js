@@ -19,18 +19,18 @@ const initialState = {
   nickname: "",
 };
 
-export default function RegisterScreen() {
-  console.log(Platform.OS);
+export default function RegistrationScreen() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
 
   const [dimensions, setdimensions] = useState(
-    Dimensions.get("window").width - 20 * 2
+    Dimensions.get("window").width - 16 * 2
   );
 
   useEffect(() => {
     const onChange = () => {
-      const width = Dimensions.get("window").width - 20 * 2;
+      const width = Dimensions.get("window").width - 16 * 2;
+
       setdimensions(width);
     };
     Dimensions.addEventListener("change", onChange);
@@ -51,54 +51,52 @@ export default function RegisterScreen() {
       <View style={styles.container}>
         <ImageBackground
           style={styles.image}
-          source={require("../../assets/images/stars-on-night.jpg")}
+          source={require("../../../assets/images/photoBG.png")}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            // behavior={Platform.OS == "ios" ? "padding" : "height"}
           >
             <View
               style={{
                 ...styles.form,
-                marginBottom: isShowKeyboard ? 20 : 150,
+                marginBottom: isShowKeyboard ? 30 : 110,
                 width: dimensions,
               }}
             >
               <View style={styles.header}>
-                <Text style={styles.headerTitle}>Hello</Text>
-                <Text style={styles.headerTitle}>Sign up to get started</Text>
+                <Text style={styles.headerTitle}>Регистрация</Text>
               </View>
               <View>
-                <Text style={styles.inputTitle}>NICKNAME</Text>
+
                 <TextInput
                   style={styles.input}
-                  textAlign={"center"}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
+                  placeholder="Логин"
                   onChangeText={(value) =>
                     setstate((prevState) => ({ ...prevState, nickname: value }))
                   }
                 />
               </View>
               <View style={{ marginTop: 20 }}>
-                <Text style={styles.inputTitle}>EMAIL ADDRES</Text>
-                <TextInput
+              <TextInput
                   style={styles.input}
-                  textAlign={"center"}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
+                  placeholder="Адрес электронной почты"
                   onChangeText={(value) =>
                     setstate((prevState) => ({ ...prevState, email: value }))
                   }
                 />
               </View>
               <View style={{ marginTop: 20 }}>
-                <Text style={styles.inputTitle}>PASSWORD</Text>
-                <TextInput
+              <TextInput
                   style={styles.input}
-                  textAlign={"center"}
+                  color='#BDBDBD'
                   secureTextEntry={true}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.password}
+                  placeholder="Введите свой пароль"
                   onChangeText={(value) =>
                     setstate((prevState) => ({ ...prevState, password: value }))
                   }
@@ -109,8 +107,11 @@ export default function RegisterScreen() {
                 style={styles.btn}
                 onPress={keyboardHide}
               >
-                <Text style={styles.btnTitle}>SIGN UP</Text>
+                <Text style={styles.btnTitle}>Зарегистрироваться</Text>
               </TouchableOpacity>
+              <View style={styles.authFooter}>
+                  <Text style={styles.switchText}>Уже есть аккаунт? Войти</Text>
+              </View>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
@@ -128,56 +129,62 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
+    // justifyContent: "center",
     alignItems: "center",
   },
   input: {
     borderWidth: 1,
-    borderColor: "#f0f8ff",
-    height: 40,
-    borderRadius: 6,
+    borderColor: "#e8e8e8",
+    height: 50,
+    borderRadius: 8,
+    backgroundColor: '#f6f6f6',
 
-    color: "#f0f8ff",
+    padding: 15,
+    marginBottom: 16,
+
+    color: "#212121",
   },
   form: {
-    // marginHorizontal: 40,
+    marginHorizontal: 40,
   },
   inputTitle: {
     color: "#f0f8ff",
     marginBottom: 10,
     fontSize: 18,
-    fontFamily: "DMMono-Regular",
+    fontFamily: "Roboto-Medium",
   },
   btn: {
-    borderRadius: 6,
-    borderWidth: 1,
-    height: 40,
-    marginTop: 40,
-    justifyContent: "center",
+    marginTop: 43,
+    marginBottom: 16,
     alignItems: "center",
-    marginHorizontal: 20,
-    ...Platform.select({
-      ios: {
-        backgroundColor: "transparent",
-        borderColor: "#f0f8ff",
-      },
-      android: {
-        backgroundColor: "#4169e1",
-        borderColor: "transparent",
-      },
-    }),
+    paddingTop: 16,
+    paddingBottom: 16,
+    backgroundColor: "#FF6C00",
+    borderRadius: 100,
   },
   btnTitle: {
     color: Platform.OS === "ios" ? "#4169e1" : "#f0f8ff",
-    fontSize: 18,
-    fontFamily: "DMMono-Regular",
+    fontSize: 16,
+    fontFamily: "Roboto-Regular",
   },
   header: {
     alignItems: "center",
-    marginBottom: 120,
+    marginBottom: 33,
   },
   headerTitle: {
-    fontSize: 40,
+    fontSize: 30,
     color: "#f0f8ff",
-    fontFamily: "DMMono-Regular",
+    fontFamily: "Roboto-Medium",
+  },
+  authFooter: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+   switchText: {
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    lineHeight: 19,
+    color:'#1b4371'
   },
 });
