@@ -21,7 +21,7 @@ const initialState = {
 
 
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   console.log(Platform.OS);
 
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
@@ -104,7 +104,12 @@ export default function LoginScreen() {
                 <Text style={styles.btnTitle}>Войти</Text>
               </TouchableOpacity>
               <View style={styles.authFooter}>
-                  <Text style={styles.switchText}>Нет аккаунта? Зарегистрироваться</Text>
+                  <Text style={styles.switchText}>Нет аккаунта?</Text>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Register")}
+                  >
+                    <Text style={styles.switchLink}>Зарегистрироваться</Text>
+                  </TouchableOpacity>
               </View>
             </View>
           </KeyboardAvoidingView>
@@ -180,5 +185,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     color:'#1b4371'
+  },
+  switchLink: {
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    lineHeight: 19,
+    color: "#1B4371",
+    textDecorationLine: "underline",
   },
 });

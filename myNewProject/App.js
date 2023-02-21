@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {} from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
-
-import LoginScreen from './src/screens/auth/LoginScreen';
-import RegistrationScreen from './src/screens/auth/RegistrationScreen';
 
 import * as Font from "expo-font";
 import AppLoading from 'expo-app-loading';
+
+import { NavigationContainer } from "@react-navigation/native";
+
+import { useRoute } from "./router";
 
 
 const loadApplication = async () => {
@@ -17,27 +16,18 @@ const loadApplication = async () => {
   });
 };
 
-const AuthStack = createStackNavigator();
-
 export default function App() {
-  const [isReady, setIsReady] = useState(false);
-
-  if (!isReady) {
+  const [iasReady, setIasReady] = useState(false);
+  const routing = useRoute(true);
+  if (!iasReady) {
     return (
       <AppLoading
         startAsync={loadApplication}
-        onFinish={() => setIsReady(true)}
+        onFinish={() => setIasReady(true)}
         onError={console.warn}
       />
     );
   }
 
-  return (
-    <NavigationContainer>
-      <AuthStack.Navigator>
-        <AuthStack.Screen name="Register" component={RegistrationScreen} />
-        <AuthStack.Screen name="Login" component={LoginScreen} />
-      </AuthStack.Navigator>
-    </NavigationContainer>
-  );
+  return <NavigationContainer>{routing}</NavigationContainer>;
 }
