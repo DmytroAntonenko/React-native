@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {} from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
 import LoginScreen from './src/screens/auth/LoginScreen';
 import RegistrationScreen from './src/screens/auth/RegistrationScreen';
@@ -15,6 +17,8 @@ const loadApplication = async () => {
   });
 };
 
+const AuthStack = createStackNavigator();
+
 export default function App() {
   const [isReady, setIsReady] = useState(false);
 
@@ -29,9 +33,11 @@ export default function App() {
   }
 
   return (
-    <>
-    <LoginScreen />
-    {/* <RegistrationScreen /> */}
-    </>
+    <NavigationContainer>
+      <AuthStack.Navigator>
+        <AuthStack.Screen name="Register" component={RegistrationScreen} />
+        <AuthStack.Screen name="Login" component={LoginScreen} />
+      </AuthStack.Navigator>
+    </NavigationContainer>
   );
 }

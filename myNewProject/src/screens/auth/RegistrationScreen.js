@@ -71,7 +71,7 @@ export default function RegistrationScreen() {
                 <TextInput
                   style={styles.input}
                   onFocus={() => setIsShowKeyboard(true)}
-                  value={state.email}
+                  value={state.nickname}
                   placeholder="Логин"
                   onChangeText={(value) =>
                     setstate((prevState) => ({ ...prevState, nickname: value }))
