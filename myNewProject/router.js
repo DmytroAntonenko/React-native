@@ -21,28 +21,27 @@ import {
     AntDesign,
   } from "@expo/vector-icons"
 
-export const useRoute = (isAuth) => {
-  if (!isAuth) {
-    return (
-      <AuthStack.Navigator>
-        <AuthStack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="Login"
-          component={LoginScreen}
-        />
-        <AuthStack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="Register"
-          component={RegisterScreen}
-        />
-        
-      </AuthStack.Navigator>
-    );
-  }
+  export const useRoute = (isAuth) => {
+    if (!isAuth) {
+      return (
+        <AuthStack.Navigator>
+          <AuthStack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="Login"
+            component={LoginScreen}
+          />
+          <AuthStack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="Register"
+            component={RegisterScreen}
+          />
+        </AuthStack.Navigator>
+      );
+    }
   return (
     <MainTab.Navigator 
     tabBarOptions={{ showLabel: false }}
@@ -58,7 +57,7 @@ export const useRoute = (isAuth) => {
           paddingRight: 15,
         },
       }}>
-       {/* <MaterialIcons name="logout" size={24} color="black" />  */}
+       
       <MainTab.Screen
         options={{
           tabBarIcon: ({ focused, size, color }) => (
