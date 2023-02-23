@@ -1,18 +1,19 @@
-import firebase from "firebase";
-import "firebase/auth";
+
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+
 
 const firebaseConfig = {
-  apiKey: "API_KEY",
-  authDomain: "DOMAIN",
-  databaseURL: "URL",
-  projectId: "PROJECT_ID",
-  storageBucket: "STORAGE",
-  messagingSenderId: "SENDER_ID",
-  appId: "APP_ID",
+  apiKey: "AIzaSyCvWEIKHoibqdGOXQHBbVYLEYiWsRyPFMY",
+  authDomain: "react-nativehw.firebaseapp.com",
+  projectId: "react-nativehw",
+  storageBucket: "react-nativehw.appspot.com",
+  messagingSenderId: "795373762855",
+  appId: "1:795373762855:web:9949a409b082fa3c649102",
+  measurementId: "G-3GKL8437NW"
 };
 
-firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-const auth = firebase.auth();
-
-export { auth };
+export const auth = getAuth(app);
